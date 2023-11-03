@@ -37,7 +37,7 @@ for record in fitfile.get_messages("record"):
 df_power = pd.DataFrame({'power': power_data, 'timestamp': timestamps, 'speed': speed_data, 'heart_rate': hr_data})
 
 # Calculate NP, IF, and TSS
-norm_power = np.sqrt(np.sqrt(np.mean(df_power['power'].rolling(30).mean() ** 4)))
+norm_power = np.sqrt(np.sqrt(np.mean(df_power['power'].rolling(15).mean() ** 4)))
 intensity = norm_power / ftp
 moving_time = df_power['timestamp'].iloc[-1].timestamp() - df_power['timestamp'].iloc[0].timestamp()
 tss = (moving_time * norm_power * intensity) / (ftp * 3600.0) * 100.0
